@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: n-body
+  namespace: default
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: n-body
+  template:
+    metadata:
+      labels:
+        app: n-body
+      name: n-body
+    spec:
+      runtimeClassName: spin
+      containers:
+        - image: quay.io/korvoj/wasm-spin/n-body:v1
+          command:
+            - /
+          name: n-body
